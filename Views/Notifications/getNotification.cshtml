@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "getNotification";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="m-y-0">Edit</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+
+            <textarea id="mytextarea"></textarea>
+            <input type="button" id="ButtonID" value="+" />
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.tiny.cloud/1/dxfdqc0hn93m2v53hekrv3dkcw1y56mn073hg1jdutxdoflf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    //document.getElementById("#tox-statusbar__text-container").innerHTML = "";
+    tinymce.init({
+        selector: "#mytextarea",
+        plugins: "emoticons",
+        toolbar: "emoticons",
+        toolbar_location: "bottom",
+        menubar: false
+    });
+    $(function () {
+        $("#ButtonID").click(function () {
+            var Message = $('#mytextarea').val();
+            alert("Salam");
+                $.ajax({
+                    type: "POST",
+                    url: "/Notifications/getNotificaion",
+                    data: Message,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Hello: ");
+                    },
+                    failure: function (response) {
+                        alert("failure");
+                    },
+                    error: function (response) {
+                        alert("error");
+                    }
+                });
+            });
+        });
+});
+</script>
+
